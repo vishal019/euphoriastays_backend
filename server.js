@@ -27,7 +27,7 @@ app.use(cors({
     'http://localhost:5173', 
     'https://adminnirwana-front.vercel.app',
     'http://localhost:5174',
-    'https://euphoriastays-frontend.vercel.app/',
+    'https://euphoriastays-frontend.vercel.app',
     'https://nirwanastays.com',
     'https://www.nirwanastays.com',
     'https://admin.nirwanastays.com'
