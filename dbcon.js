@@ -7,17 +7,16 @@ const activeConnections = new Set();
 const pool = mysql.createPool({
   host: process.env.DB_HOST || 'srv1881.hstgr.io',
   user: process.env.DB_USER || 'u774474676_euphoriastays',
-  password:process.env.DB_PASSWORD||'Euphoriastays@1234',
+  password: process.env.DB_PASSWORD || 'Euphoriastays@1234',
   database: process.env.DB_NAME || 'u774474676_euphoria',
-  port: parseInt(process.env.DB_PORT || '3306'),
+  port: 3306,
   
-  // Conservative pool settings
+  // Adjusted for Hostinger Remote MySQL
   connectionLimit: 5,
-  waitForConnections: false,
-  queueLimit: 0,
-  connectTimeout: 10000,
-  idleTimeout: 30000,
-  maxIdle: 2,
+  waitForConnections: true,  // Change this from false to true
+  queueLimit: 0,             // Allows requests to wait if the pool is full
+  connectTimeout: 20000,     // Increased to 20 seconds for remote handshakes
+  
   enableKeepAlive: true,
   keepAliveInitialDelay: 10000,
   namedPlaceholders: true
