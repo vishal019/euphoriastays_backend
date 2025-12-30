@@ -127,6 +127,18 @@ const loadRoutes = (routePath, routePrefix) => {
 };
 
 // Load all routes with error handling
+
+app.get("/", (req, res) => {
+  res.json({ 
+    message: "https://e.euphoriastays.digitaldiariess.com/ API", 
+    status: "Running ✅",
+    version: "1.0.0",
+    timestamp: new Date().toISOString()
+  });
+});
+
+
+
 loadRoutes('./routes/dashboard', '/admin/dashboard');
 loadRoutes('./routes/properties', '/admin/properties');
 loadRoutes('./routes/gallery', '/admin/gallery');
