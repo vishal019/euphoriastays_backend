@@ -7,20 +7,22 @@ const activeConnections = new Set();
 const pool = mysql.createPool({
   host: process.env.DB_HOST || 'srv1881.hstgr.io',
   user: process.env.DB_USER || 'u774474676_euphoriastays',
-  password: process.env.DB_PASSWORD || 'Euphoriastays@1234',
+  password:process.env.DB_PASSWORD||'Euphoriastays@1234',
   database: process.env.DB_NAME || 'u774474676_euphoria',
   port: parseInt(process.env.DB_PORT || '3306'),
   
-  // CHANGE THESE SETTINGS:
-  connectionLimit: 10,             // Increase slightly if hosting allows
-  waitForConnections: true,        // IMPORTANT: Allow the app to wait for a free slot
-  queueLimit: 0,                   // Unlimited queueing (prevents immediate "Service Unavailable")
-  connectTimeout: 20000,           // Give it more time to handshake (20s)
-  
+  // Conservative pool settings
+  connectionLimit: 5,
+  waitForConnections: false,
+  queueLimit: 0,
+  connectTimeout: 10000,
+  idleTimeout: 30000,
+  maxIdle: 2,
   enableKeepAlive: true,
   keepAliveInitialDelay: 10000,
   namedPlaceholders: true
 });
+
 // Connection monitoring
 pool.on('acquire', (connection) => {
   activeConnections.add(connection.threadId);
