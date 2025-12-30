@@ -6,9 +6,9 @@ const activeConnections = new Set();
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST || 'srv1881.hstgr.io',
-  user: process.env.DB_USER || 'u774474676_nirwanastays',
-  password:process.env.DB_PASSWORD||'Nirwana@$%123',
-  database: process.env.DB_NAME || 'u774474676_nirwana',
+  user: process.env.DB_USER || 'u774474676_euphoriastays',
+  password:process.env.DB_PASSWORD||'Euphoriastays@1234',
+  database: process.env.DB_NAME || 'u774474676_euphoria',
   port: parseInt(process.env.DB_PORT || '3306'),
   
   // Conservative pool settings
