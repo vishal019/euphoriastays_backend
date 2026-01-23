@@ -1110,3 +1110,7 @@
 ::1 - - [05/Sep/2025:10:14:35 +0000] "GET /sourcemaps/cards.a6a1ff9a828ec9a671cd.js.map HTTP/1.1" 404 155 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0"
 ::1 - - [05/Sep/2025:10:14:35 +0000] "OPTIONS /sourcemaps/24.69d823e865374687264a.js.map HTTP/1.1" 200 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0"
 ::1 - - [05/Sep/2025:10:14:35 +0000] "GET /sourcemaps/24.69d823e865374687264a.js.map HTTP/1.1" 404 152 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0"
+::1 - - [30/Dec/2025:16:01:54 +0000] "GET / HTTP/1.1" 503 70 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+::1 - - [30/Dec/2025:16:01:56 +0000] "GET /favicon.ico HTTP/1.1" 503 70 "http://localhost:5000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+::1 - - [30/Dec/2025:16:03:18 +0000] "GET / HTTP/1.1" 200 142 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+::1 - - [30/Dec/2025:16:03:19 +0000] "GET /favicon.ico HTTP/1.1" 404 122 "http://localhost:5000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"

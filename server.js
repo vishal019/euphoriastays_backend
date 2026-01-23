@@ -31,7 +31,9 @@ app.use(cors({
     'https://nirwanastays.com',
     'https://www.nirwanastays.com',
     'https://admin.nirwanastays.com',
-    'https://e.euphoriastays.digitaldiariess.com'
+    'https://e.euphoriastays.digitaldiariess.com',
+    'https://euphoriastays.digitaldiariess.com'
+
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
