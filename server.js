@@ -32,7 +32,9 @@ app.use(cors({
     'https://www.nirwanastays.com',
     'https://admin.nirwanastays.com',
     'https://e.euphoriastays.digitaldiariess.com',
-    'https://euphoriastays.digitaldiariess.com'
+    'https://euphoriastays.digitaldiariess.com',
+    'https://e.euphoriastays.com',
+    'https://euphoriastays.com'
 
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
