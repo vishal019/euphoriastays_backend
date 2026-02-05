@@ -25,12 +25,9 @@ app.use(morgan('dev')); // Log to console in development
 app.use(cors({
   origin: [
     'http://localhost:5173', 
-    'https://adminnirwana-front.vercel.app',
+    'https://admineuphoriastays.vercel.app',
     'http://localhost:5174',
     'https://euphoriastays-frontend.vercel.app',
-    'https://nirwanastays.com',
-    'https://www.nirwanastays.com',
-    'https://admin.nirwanastays.com',
     'https://e.euphoriastays.digitaldiariess.com',
     'https://euphoriastays.digitaldiariess.com',
     'https://e.euphoriastays.com',
