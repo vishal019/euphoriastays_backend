@@ -26,9 +26,9 @@ const payu_salt = process.env.PAYU_MERCHANT_SALT || "diKKGjJv3yODMXnmPF48WXaQLWo
 
 const PAYU_BASE_URL = process.env.PAYU_BASE_URL || "https://test.payu.in"  //'https://secure.payu.in';
 
-const FRONTEND_BASE_URL = process.env.FRONTEND_BASE_URL || "https://nirwanastays.com";
+const FRONTEND_BASE_URL = process.env.FRONTEND_BASE_URL || "https://euphoriastays.com";
 
-const ADMIN_BASE_URL = process.env.ADMIN_BASE_URL || "https://api.nirwanastays.com";
+const ADMIN_BASE_URL = process.env.ADMIN_BASE_URL || "https://e.euphoriastays.com";
 
 // BOOKING CLEANUP JOB
 
@@ -785,8 +785,8 @@ router.post("/payments/payu", async (req, res) => {
       firstname: truncatedFirstname,
       email: truncatedEmail,
       phone: cleanPhone.substring(0, 10),
-      surl: `https://api.nirwanastays.com/admin/bookings/success/verify/${txnid}`, // ✅ backend route
-      furl: `https://api.nirwanastays.com/admin/bookings/failed/verify/${txnid}`,  // ✅ backend route
+      surl: `https://e.euphoriastays.com/admin/bookings/success/verify/${txnid}`, // ✅ backend route
+      furl: `https://e.euphoriastays.com/admin/bookings/failed/verify/${txnid}`,  // ✅ backend route
       hash,
       currency: "INR",
       udf1, udf2, udf3, udf4, udf5, udf6, udf7, udf8, udf9, udf10
@@ -1337,7 +1337,7 @@ async function sendPdfEmail(params) {
 
                             style="font-size:0pt; line-height:0pt; text-align:right;background:#ffffff;padding-right: 6px;">
 
-                            <img src="https://nirwanastays.com/logo-dark.png" width="auto"
+                            <img src="https://euphoriastays.com/logo4.jpg" width="auto"
 
                               height="55" mc:edit="image_2" style="max-height:55px;" border="0" alt="Logo" />
 
@@ -1491,7 +1491,7 @@ async function sendPdfEmail(params) {
 
                                             <a href="mailto: ${ownerEmail}"
 
-                                              style="color: #216896;">bookings@nirwanastays.com</a> if there is any
+                                              style="color: #216896;">bookings@euphoriastays.com</a> if there is any
 
                                             discrepancy in this payment
 
@@ -1708,7 +1708,7 @@ async function sendPdfEmail(params) {
 
                                           stage,
 
-                                          you will be notified and this confirmation email & nirwana stays Booking ID will be null and void.</div>
+                                          you will be notified and this confirmation email & euphoria stays  Booking ID will be null and void.</div>
 
                                       </td>
 
@@ -1840,7 +1840,7 @@ async function sendPdfEmail(params) {
 
                                                     href="mailto:${ownerEmail}"
 
-                                                    style="color: #164e6f;"><b>bookings@nirwanastays.com</b></a></span>
+                                                    style="color: #164e6f;"><b>bookings@euphoriastays.com</b></a></span>
 
                                               </div>
 
@@ -1896,9 +1896,9 @@ async function sendPdfEmail(params) {
 
                                           email account that is not monitored. To ensure that you receive
 
-                                          communication related to your booking from Nirwana stays , please add <a href="mailto:bookings@nirwanastays.com "
+                                          communication related to your booking from euphoria stays , please add <a href="mailto:bookings@euphoriastays.com "
 
-                                            style="color: #164e6f;"><b>bookings@nirwanastays.com </b></a> to your contact list
+                                            style="color: #164e6f;"><b>bookings@euphoriastays.com </b></a> to your contact list
 
                                           and
 
@@ -2466,7 +2466,7 @@ async function sendPdfEmail(params) {
 
                               style="font-size:0pt; line-height:0pt; text-align:right;background:#ffffff;padding-right: 6px;">
 
-                                <img src="https://nirwanastays.com/logo-dark.png" width="auto"
+                                <img src="https://euphoriastays.com/logo4.jpg" width="auto"
 
                                 height="55" mc:edit="image_2" style="max-height:55px;" border="0" alt="Logo" />
 
@@ -2620,7 +2620,7 @@ async function sendPdfEmail(params) {
 
                                               <a href="mailto: ${ownerEmail}"
 
-                                                style="color: #216896;">bookings@nirwanastays.com</a> if there is any
+                                                style="color: #216896;">bookings@euphoriastays.com</a> if there is any
 
                                               discrepancy in this payment
 
@@ -2820,7 +2820,7 @@ async function sendPdfEmail(params) {
 
                                             stage,
 
-                                            you will be notified and this confirmation email & nirwana stays Booking ID will be null and void.</div>
+                                            you will be notified and this confirmation email & euphoria stays Booking ID will be null and void.</div>
 
                                         </td>
 
@@ -2952,7 +2952,7 @@ async function sendPdfEmail(params) {
 
                                                       href="mailto:${ownerEmail}"
 
-                                                      style="color: #164e6f;"><b>bookings@nirwanastays.com</b></a></span>
+                                                      style="color: #164e6f;"><b>bookings@euphoriastays.com</b></a></span>
 
                                                 </div>
 
@@ -3008,9 +3008,9 @@ async function sendPdfEmail(params) {
 
                                             email account that is not monitored. To ensure that you receive
 
-                                            communication related to your booking from Nirwana stays , please add <a href="mailto:bookings@nirwanastays.com "
+                                            communication related to your booking from euphoria stays , please add <a href="mailto:bookings@euphoriastays.com "
 
-                                              style="color: #164e6f;"><b>bookings@nirwanastays.com </b></a> to your contact list
+                                              style="color: #164e6f;"><b>bookings@euphoriastays.com </b></a> to your contact list
 
                                             and
 
@@ -3125,29 +3125,27 @@ async function sendPdfEmail(params) {
     port: 587,
 
     auth: {
-      user: "bookings@nirwanastays.com",
+      user: "bookings@euphoriastays.com",
 
-      pass: "Nirwanastays@6484",
+      pass: "Euphoriastays@6484",
     },
   });
 
   const mailOptions = {
-    from: "bookings@nirwanastays.com",
+    from: "bookings@euphoriastays.com",
     to: email.trim(),
     cc: ownerEmail,
-    bcc: "nirwanastays@gmail.com",
-    subject: "NirwanaStays Resort Booking",
-
+    bcc: "euphoriastays@gmail.com",
+    subject: "EuphoriaStays Resort Booking",
     html: html, // Make sure HTML variable is defined
   };
 
   const mailOptions_villa = {
-    from: "bookings@nirwanastays.com",
+    from: "bookings@euphoriastays.com",
     to: email.trim(),
     cc: ownerEmail,
-    bcc: "nirwanastays@gmail.com",
-    subject: "NirwanaStays Resort Booking",
-
+    bcc: "euphoriastays@gmail.com",
+    subject: "EuphoriaStays Resort Booking",
     html: html_villa, // Make sure HTML variable is defined
   };
 
