@@ -9,7 +9,7 @@ adminUsersRouter.get('/', async (req, res) => {
   try {
     
     const [rows] = await pool.execute(
-      'SELECT id, name, email, role, status, phoneNumber, avatar,password FROM users ORDER BY id DESC'
+      'SELECT id, name, email, role, status, phoneNumber, avatar, lastSeen, isActive FROM users ORDER BY id DESC'
     );
     res.json(rows);
   } catch (error) {
@@ -27,7 +27,7 @@ adminUsersRouter.get('/:id', async (req, res) => {
     const { id } = req.params;
     
     const [rows] = await pool.execute(
-      'SELECT id, name, email, role, status, phoneNumber, avatar FROM users WHERE id = ?',
+      'SELECT id, name, email, role, status, phoneNumber, avatar, lastSeen, isActive FROM users WHERE id = ?',
       [id]
     );
     
@@ -127,7 +127,7 @@ adminUsersRouter.post('/', async (req, res) => {
 adminUsersRouter.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email, phoneNumber, role, status, avatar, password } = req.body;
+    const { name, email, phoneNumber, role, status, avatar, password, lastSeen, isActive } = req.body;
     
     // Check if user exists
     const [existingUsers] = await pool.execute(
@@ -230,6 +230,16 @@ adminUsersRouter.put('/:id', async (req, res) => {
       updateValues.push(hashedPassword);
     }
     
+    if (lastSeen !== undefined && lastSeen !== null) {
+      updateFields.push('lastSeen = ?');
+      updateValues.push(lastSeen);
+    }
+    
+    if (isActive !== undefined && isActive !== null) {
+      updateFields.push('isActive = ?');
+      updateValues.push(isActive);
+    }
+    
     if (updateFields.length === 0) {
       return res.status(400).json({ 
         error: 'No fields to update' 
@@ -247,7 +257,7 @@ adminUsersRouter.put('/:id', async (req, res) => {
     
     // Fetch updated user
     const [updatedUserRows] = await pool.execute(
-      'SELECT id, name, email, role, status, phoneNumber, avatar FROM users WHERE id = ?',
+      'SELECT id, name, email, role, status, phoneNumber, avatar, lastSeen, isActive FROM users WHERE id = ?',
       [id]
     );
     
