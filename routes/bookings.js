@@ -3122,7 +3122,7 @@ async function sendPdfEmail(params) {
 
     secure: false,
 
-    port: 587,
+    port: 465,
 
     auth: {
       user: "euphoriastay.official@gmail.com",
