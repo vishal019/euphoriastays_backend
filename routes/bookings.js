@@ -3118,21 +3118,21 @@ async function sendPdfEmail(params) {
 
 
   const transporter = nodemailer.createTransport({
-    host: "smtp.hostinger.com",
+    host: "smtp.gmail.com",
 
     secure: false,
 
     port: 587,
 
     auth: {
-      user: "bookings@euphoriastays.com",
+      user: "euphoriastay.official@gmail.com",
 
-      pass: "Euphoriastays@6484",
+      pass: "nrrxelvczhyywpxr",
     },
   });
 
   const mailOptions = {
-    from: "bookings@euphoriastays.com",
+    from: "euphoriastay.official@gmail.com",
     to: email.trim(),
     cc: ownerEmail,
     bcc: "euphoriastays@gmail.com",
@@ -3141,7 +3141,7 @@ async function sendPdfEmail(params) {
   };
 
   const mailOptions_villa = {
-    from: "bookings@euphoriastays.com",
+    from: "euphoriastay.official@gmail.com",
     to: email.trim(),
     cc: ownerEmail,
     bcc: "euphoriastays@gmail.com",
