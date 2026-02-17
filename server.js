@@ -152,6 +152,7 @@ loadRoutes('./routes/bookings', '/admin/bookings');
 loadRoutes('./routes/ratings', '/admin/ratings');
 loadRoutes('./routes/calendar', '/admin/calendar');
 loadRoutes('./routes/blogs', '/admin/blogs');
+loadRoutes('./routes/banners', '/admin/banners');
 // Public blog endpoints (for frontend)
 loadRoutes('./routes/blogs', '/api/blogs');
 
