@@ -3275,7 +3275,7 @@ router.post("/success/verify/:txnid", async (req, res) => {
       console.log("🚀 Attempting to send confirmation email...");
       try {
         // REMOVE 'await' here to prevent the request from hanging
-         sendPdfEmail({
+       await sendPdfEmail({
           email: recipientEmail,
           name: bk.guest_name,
           BookingId: bk.id,
