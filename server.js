@@ -32,7 +32,8 @@ app.use(cors({
     'https://euphoriastays.digitaldiariess.com',
     'https://e.euphoriastays.com',
     'https://euphoriastays.com',
-    'http://192.168.1.7:5173'
+    'http://192.168.1.7:5173',
+    'https://www.euphoriastays.com'
 
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
