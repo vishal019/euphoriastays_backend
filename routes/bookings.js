@@ -3135,7 +3135,7 @@ async function sendPdfEmail(params) {
     from: "euphoriastay.official@gmail.com",
     to: email.trim(),
     cc: ownerEmail,
-    bcc: "euphoriastays@gmail.com",
+    bcc: "bookings@euphoriastays.com",
     subject: "EuphoriaStays Resort Booking",
     html: html, // Make sure HTML variable is defined
   };
@@ -3144,7 +3144,7 @@ async function sendPdfEmail(params) {
     from: "euphoriastay.official@gmail.com",
     to: email.trim(),
     cc: ownerEmail,
-    bcc: "euphoriastays@gmail.com",
+    bcc: "bookings@euphoriastays.com",
     subject: "EuphoriaStays Resort Booking",
     html: html_villa, // Make sure HTML variable is defined
   };
