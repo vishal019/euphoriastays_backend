@@ -137,6 +137,9 @@ adminUsersRouter.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { name, email, phoneNumber, role, status, avatar, password } = req.body;
+
+    // Normalize role/status for consistent validation
+    const normalizedRole = role ? role.toLowerCase() : undefined;
     
     // Check if user exists
     const [existingUsers] = await pool.execute(
@@ -148,10 +151,10 @@ adminUsersRouter.put('/:id', async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
     
-    // Validate role if provided
-    if (role) {
-      const validRoles = ['Admin', 'Manager', 'Staff'];
-      if (!validRoles.includes(role)) {
+    // Validate role if provided (accept lowercase values from frontend)
+    if (normalizedRole) {
+      const validRoles = ['admin', 'manager', 'staff'];
+      if (!validRoles.includes(normalizedRole)) {
         return res.status(400).json({ 
           error: 'Invalid role',
           validRoles 
@@ -217,9 +220,9 @@ adminUsersRouter.put('/:id', async (req, res) => {
       updateValues.push(phoneNumber);
     }
     
-    if (role) {
+    if (normalizedRole) {
       updateFields.push('role = ?');
-      updateValues.push(role);
+      updateValues.push(normalizedRole);
     }
     
     if (status) {
