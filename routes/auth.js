@@ -6,6 +6,11 @@ const pool = require('../dbcon');
 
 const authRouter = express.Router();
 
+// GET /admin/auth/check - verify auth route is mounted (no auth required)
+authRouter.get('/check', (req, res) => {
+  res.json({ ok: true, route: 'admin/auth' });
+});
+
 // Rate limit login attempts: 5 per 15 minutes per IP
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
