@@ -7,7 +7,7 @@ const adminUsersRouter = express.Router();
 // All /admin/users routes are admin-only (RBAC)
 adminUsersRouter.use((req, res, next) => {
   const authUser = req.user;
-  if (!authUser || authUser.role !== 'Admin') {
+  if (!authUser || (authUser.role || '').toLowerCase() !== 'admin') {
     return res.status(403).json({ error: 'Forbidden: admin access required' });
   }
   next();
@@ -150,7 +150,7 @@ adminUsersRouter.put('/:id', async (req, res) => {
     
     // Validate role if provided
     if (role) {
-      const validRoles = ['admin', 'manager', 'staff'];
+      const validRoles = ['Admin', 'Manager', 'Staff'];
       if (!validRoles.includes(role)) {
         return res.status(400).json({ 
           error: 'Invalid role',
