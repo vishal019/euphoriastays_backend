@@ -9,7 +9,7 @@ adminUsersRouter.get('/', async (req, res) => {
   try {
     
     const [rows] = await pool.execute(
-      'SELECT id, name, email, role, status, phoneNumber, avatar,password FROM users ORDER BY id DESC'
+      'SELECT id, name, email, role, status, phoneNumber, avatar FROM users ORDER BY id DESC'
     );
     res.json(rows);
   } catch (error) {

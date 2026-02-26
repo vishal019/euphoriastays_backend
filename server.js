@@ -8,6 +8,7 @@ const fs = require('fs');
 const path = require('path');
 const safeParse = require('./utils/safeParse');
 const pool = require('./dbcon');
+const authMiddleware = require('./middleware/authMiddleware');
 
 dotenv.config();
 const app = express();
@@ -145,7 +146,8 @@ app.get("/", (req, res) => {
 loadRoutes('./routes/dashboard', '/admin/dashboard');
 loadRoutes('./routes/properties', '/admin/properties');
 loadRoutes('./routes/gallery', '/admin/gallery');
-loadRoutes('./routes/users', '/admin/users');
+app.use('/admin/auth', require('./routes/auth'));
+app.use('/admin/users', authMiddleware, require('./routes/users'));
 loadRoutes('./routes/coupons', '/admin/coupons');
 loadRoutes('./routes/cities', '/admin/cities');
 loadRoutes('./routes/ammenities', '/admin/amenities');
