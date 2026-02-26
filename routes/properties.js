@@ -37,6 +37,8 @@ routes.get('/accommodations', async (req, res) => {
             order = 'DESC'
         } = req.query;
 
+        const authUser = req.user || null;
+
         // Validate numeric parameters
         const pageNum = Math.max(1, parseInt(page)) || 1;
         const limitNum = Math.min(100, Math.max(1, parseInt(limit))) || 10;
@@ -112,6 +114,12 @@ routes.get('/accommodations', async (req, res) => {
         if (search) {
             conditions.push('(name LIKE ? OR description LIKE ?)');
             params.push(`%${search}%`, `%${search}%`);
+        }
+
+        // Manager: restrict to own accommodations by owner_id
+        if (authUser && authUser.role === 'manager') {
+            conditions.push('owner_id = ?');
+            params.push(authUser.id);
         }
 
         if (amenities) {
@@ -241,6 +249,7 @@ routes.get('/accommodations/:id', async (req, res) => {
         return res.status(400).json({ error: 'Invalid accommodation ID format' });
     }
 
+    const authUser = req.user || null;
     const connection = await createConnection();
 
     try {
@@ -253,8 +262,8 @@ routes.get('/accommodations/:id', async (req, res) => {
             FROM accommodations a
             LEFT JOIN users u ON a.owner_id = u.id
             LEFT JOIN cities c ON a.city_id = c.id
-            WHERE a.id = ?`,
-            [id]
+            WHERE a.id = ?${authUser && authUser.role === 'manager' ? ' AND a.owner_id = ?' : ''}`,
+            authUser && authUser.role === 'manager' ? [id, authUser.id] : [id]
         );
 
         if (rows.length === 0) {
@@ -364,6 +373,8 @@ routes.get('/accommodations/:id', async (req, res) => {
 routes.post('/accommodations', async (req, res) => {
     try {
         // Destructure nested structure from frontend
+        const authUser = req.user || null;
+
         const {
             basicInfo,
             location,
@@ -408,6 +419,12 @@ routes.post('/accommodations', async (req, res) => {
         const childPrice = packages?.pricing?.child || 0;
         const maxGuests = packages?.pricing?.maxGuests || 2;
 
+        // Determine owner: managers can only create their own accommodations
+        const resolvedOwnerId =
+            authUser && authUser.role === 'manager'
+                ? authUser.id
+                : ownerId || null;
+
         // Insert into database
         const [result] = await connection.execute(
             `INSERT INTO accommodations 
@@ -425,7 +442,7 @@ routes.post('/accommodations', async (req, res) => {
                 JSON.stringify(features),
                 JSON.stringify(images),
                 available,
-                ownerId || null,
+                resolvedOwnerId,
                 cityId || null,
                 address,
                 latitude,
@@ -487,6 +504,13 @@ routes.put('/accommodations/:id', async (req, res) => {
             }
 
             const current = existing[0];
+
+            // Managers can only update their own accommodations
+            if (req.user && req.user.role === 'manager' && current.owner_id !== req.user.id) {
+                await connection.rollback();
+                await closeConnection(connection);
+                return res.status(403).json({ error: 'Not allowed to update this accommodation' });
+            }
             const requestBody = req.body;
             console.log(requestBody)
             // Input validation function
@@ -665,13 +689,20 @@ routes.delete('/accommodations/:id', async (req, res) => {
 
         // 1. Check if accommodation exists
         const [accommodation] = await connection.execute(
-            'SELECT id FROM accommodations WHERE id = ? FOR UPDATE',
+            'SELECT id, owner_id FROM accommodations WHERE id = ? FOR UPDATE',
             [id]
         );
 
         if (accommodation.length === 0) {
             await connection.rollback();
             return res.status(404).json({ error: 'Accommodation not found' });
+        }
+
+        const current = accommodation[0];
+        // Managers can only delete their own accommodations
+        if (req.user && req.user.role === 'manager' && current.owner_id !== req.user.id) {
+            await connection.rollback();
+            return res.status(403).json({ error: 'Not allowed to delete this accommodation' });
         }
 
         // 2. Delete from all child tables

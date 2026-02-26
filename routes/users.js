@@ -4,6 +4,15 @@ const pool = require('../dbcon'); // Import the database connection pool
 
 const adminUsersRouter = express.Router();
 
+// All /admin/users routes are admin-only (RBAC)
+adminUsersRouter.use((req, res, next) => {
+  const authUser = req.user;
+  if (!authUser || authUser.role !== 'Admin') {
+    return res.status(403).json({ error: 'Forbidden: admin access required' });
+  }
+  next();
+});
+
 // GET /admin/users - Fetch all users
 adminUsersRouter.get('/', async (req, res) => {
   try {

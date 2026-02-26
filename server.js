@@ -144,7 +144,7 @@ app.get("/", (req, res) => {
 
 
 loadRoutes('./routes/dashboard', '/admin/dashboard');
-loadRoutes('./routes/properties', '/admin/properties');
+app.use('/admin/properties', authMiddleware, require('./routes/properties'));
 loadRoutes('./routes/gallery', '/admin/gallery');
 app.use('/admin/auth', require('./routes/auth'));
 app.use('/admin/users', authMiddleware, require('./routes/users'));
