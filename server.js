@@ -145,6 +145,8 @@ app.get("/", (req, res) => {
 
 loadRoutes('./routes/dashboard', '/admin/dashboard');
 app.use('/admin/properties', authMiddleware, require('./routes/properties'));
+// Public, unauthenticated properties API for frontend
+loadRoutes('./routes/properties', '/api/properties');
 loadRoutes('./routes/gallery', '/admin/gallery');
 app.use('/admin/auth', require('./routes/auth'));
 app.use('/admin/users', authMiddleware, require('./routes/users'));
