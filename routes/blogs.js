@@ -168,7 +168,7 @@ router.get('/public/:slug', async (req, res) => {
       date: blog.date,
       readTime: blog.read_time,
       image: blog.image?.startsWith('/uploads') 
-        ? `https://api.nirwanastays.com${blog.image}` 
+        ? `https://e.euphoriastays.com/${blog.image}` 
         : blog.image,
       category: blog.category,
       tags: JSON.parse(blog.tags || '[]'),
@@ -231,7 +231,7 @@ router.get('/public', async (req, res) => {
         date: blog.date,
         readTime: blog.read_time,
         image: blog.image?.startsWith('/uploads') 
-          ? `https://api.nirwanastays.com${blog.image}` 
+          ? `https://e.euphoriastays.com/${blog.image}` 
           : blog.image,
         category: blog.category,
         tags: JSON.parse(blog.tags || '[]'),
