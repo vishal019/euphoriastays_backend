@@ -28,6 +28,7 @@ app.use(cors({
     'http://localhost:5173', 
     'https://admineuphoriastays.vercel.app',
     'http://admin.euphoriastays.com',
+    'https://admin.euphoriastays.com',
     'http://localhost:5174',
     'https://euphoriastays-frontend.vercel.app',
     'https://e.euphoriastays.digitaldiariess.com',
