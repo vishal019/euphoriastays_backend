@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const pool = require("../dbcon");
+const authMiddleware = require("../middleware/authMiddleware");
 
 const crypto = require("crypto");
 
@@ -55,8 +56,8 @@ const bookingCleanup = () => {
 bookingCleanup();
 
 // GET /admin/bookings - fetch all bookings
-
-router.get("/", async (req, res) => {
+// Protected so we can apply RBAC filters server-side.
+router.get("/", authMiddleware, async (req, res) => {
   try {
     const { 
       page = 1, 
@@ -73,6 +74,13 @@ router.get("/", async (req, res) => {
     // Build WHERE clause dynamically
     let whereConditions = [];
     let queryParams = [];
+
+    // RBAC: manager can only see bookings for own accommodations
+    const role = String(req.user?.role || "").toLowerCase();
+    if (role === "manager") {
+      whereConditions.push("a.owner_id = ?");
+      queryParams.push(req.user.id);
+    }
 
     // Search filter - search in guest name, email, phone, booking ID, payment_txn_id
     if (search) {
@@ -122,6 +130,8 @@ router.get("/", async (req, res) => {
         b.food_nonveg,
         b.food_jain,
 
+        b.accommodation_id,
+        a.owner_id,
         a.name AS accommodation_name,
 
         DATE_FORMAT(b.check_in, '%Y-%m-%d') AS check_in,
