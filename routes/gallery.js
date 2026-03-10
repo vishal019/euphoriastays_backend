@@ -17,7 +17,9 @@ router.get('/', async (req, res) => {
       query += ' AND (alt LIKE ? OR src LIKE ?)';
       params.push(`%${search}%`, `%${search}%`);
     }
-    query += ' ORDER BY created_at DESC';
+    // Respect upload/order position: show images in insertion order (oldest first)
+    // If you later add a sort_order column, change this to ORDER BY sort_order ASC, id ASC
+    query += ' ORDER BY id ASC';
     const [rows] = await pool.execute(query, params);
     res.json({
       images: rows,

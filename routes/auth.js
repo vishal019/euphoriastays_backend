@@ -49,9 +49,12 @@ authRouter.post('/login', loginLimiter, async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
+    // Normalize role so RBAC checks are reliable everywhere
+    const normalizedRole = (user.role || '').toString().trim().toLowerCase();
+
     const secret = process.env.JWT_SECRET || process.env.SECRET || 'change-me-in-production';
     const token = jwt.sign(
-      { id: user.id, role: user.role, email: user.email },
+      { id: user.id, role: normalizedRole, email: user.email },
       secret,
       { expiresIn: '24h' }
     );
@@ -61,7 +64,7 @@ authRouter.post('/login', loginLimiter, async (req, res) => {
       name: user.name,
       email: user.email,
       phoneNumber: user.phoneNumber,
-      role: user.role,
+      role: normalizedRole,
       status: user.status,
       avatar: user.avatar,
     };
