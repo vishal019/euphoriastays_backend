@@ -40,6 +40,30 @@ routes.post('/', async (req, res) => {
     }
 });
 
+// PUT /admin/banners/:id
+routes.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    const { title, imageUrl, linkUrl, startDate, endDate } = req.body;
+    const connection = await createConnection();
+    try {
+        const [result] = await connection.execute(
+            `UPDATE event_banners 
+             SET title = ?, imageUrl = ?, linkUrl = ?, startDate = ?, endDate = ?
+             WHERE id = ?`,
+            [title, imageUrl || null, linkUrl || null, startDate, endDate, id]
+        );
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Banner not found' });
+        }
+        res.json({ message: 'Banner updated' });
+    } catch (error) {
+        console.error('Update banner error:', error);
+        res.status(500).json({ error: 'Database error' });
+    } finally {
+        await closeConnection(connection);
+    }
+});
+
 // DELETE /admin/banners/:id
 routes.delete('/:id', async (req, res) => {
     const connection = await createConnection();
