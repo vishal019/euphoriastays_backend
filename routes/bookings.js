@@ -378,7 +378,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.post("/offline", async (req, res) => {
+router.post("/offline", authMiddleware, async (req, res) => {
   let connection;
 
   try {
@@ -690,7 +690,7 @@ router.post("/offline", async (req, res) => {
   }
 });
 
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
 

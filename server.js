@@ -157,7 +157,7 @@ app.use('/admin/users', authMiddleware, require('./routes/users'));
 loadRoutes('./routes/coupons', '/admin/coupons');
 loadRoutes('./routes/cities', '/admin/cities');
 loadRoutes('./routes/ammenities', '/admin/amenities');
-app.use('/admin/bookings', authMiddleware, require('./routes/bookings'));
+app.use('/admin/bookings', require('./routes/bookings'));
 loadRoutes('./routes/ratings', '/admin/ratings');
 loadRoutes('./routes/calendar', '/admin/calendar');
 loadRoutes('./routes/blogs', '/admin/blogs');
