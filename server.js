@@ -36,6 +36,7 @@ app.use(cors({
     'https://e.euphoriastays.com',
     'https://euphoriastays.com',
     'http://192.168.1.7:5173',
+    'http://192.168.1.7:3000',
     'https://www.euphoriastays.com'
 
   ],
@@ -155,7 +156,7 @@ app.use('/admin/users', authMiddleware, require('./routes/users'));
 loadRoutes('./routes/coupons', '/admin/coupons');
 loadRoutes('./routes/cities', '/admin/cities');
 loadRoutes('./routes/ammenities', '/admin/amenities');
-loadRoutes('./routes/bookings', '/admin/bookings');
+app.use('/admin/bookings', authMiddleware, require('./routes/bookings'));
 loadRoutes('./routes/ratings', '/admin/ratings');
 loadRoutes('./routes/calendar', '/admin/calendar');
 loadRoutes('./routes/blogs', '/admin/blogs');

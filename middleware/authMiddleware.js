@@ -9,7 +9,7 @@ function authMiddleware(req, res, next) {
   const token = authHeader && authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
 
   if (!token) {
-    return res.status(401).json({ error: 'Authentication required' });
+    return res.status(401).json({ success: false, error: 'Authentication required', message: 'Authentication required' });
   }
 
   const secret = process.env.JWT_SECRET || process.env.SECRET || 'change-me-in-production';
@@ -18,7 +18,7 @@ function authMiddleware(req, res, next) {
     req.user = { id: decoded.id, role: decoded.role, email: decoded.email };
     next();
   } catch (err) {
-    return res.status(401).json({ error: 'Invalid or expired token' });
+    return res.status(401).json({ success: false, error: 'Invalid or expired token', message: 'Invalid or expired token. Please log in again.' });
   }
 }
 
