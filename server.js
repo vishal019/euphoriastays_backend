@@ -30,6 +30,7 @@ app.use(cors({
     'http://admin.euphoriastays.com',
     'https://admin.euphoriastays.com',
     'http://localhost:5174',
+    'https://www.vilture.com',
     'https://euphoriastays-frontend.vercel.app',
     'https://e.euphoriastays.digitaldiariess.com',
     'https://euphoriastays.digitaldiariess.com',
